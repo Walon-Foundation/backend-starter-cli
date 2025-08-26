@@ -11,7 +11,6 @@ changelog:
 before:
   hooks:
     - go mod tidy
-    - go generate ./...
 
 
 builds:
@@ -75,7 +74,7 @@ archives:
       - none*
 
 
-brews:
+homebrew_casks:
   - name: backend-starter
     ids:
       - mac-archive
@@ -83,7 +82,7 @@ brews:
       owner: Walon-Foundation
       name: homebrew-tap
     homepage: "https://github.com/Walon-Foundation/backend-starter-cli"
-    license: Apache-2.0
+    license: MIT
 
 
 release:
