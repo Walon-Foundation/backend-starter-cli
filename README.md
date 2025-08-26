@@ -1,116 +1,120 @@
-Here is a professional README.md file for the project:
-```
-Backend Starter CLI
-=====================
+# Backend Starter CLI
 
 [![Go](https://img.shields.io/badge/Go-1.24.4-blue)](https://golang.org/)
 [![Cobra](https://img.shields.io/badge/Cobra-v1.9.1-green)](https://github.com/spf13/cobra)
+![GitHub](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 
-Description
------------
+**Accelerate your backend development with terminal-driven project scaffolding and setup.**
 
-Backend Starter CLI is a command-line interface tool that allows you to quickly scaffold a backend project in a selected framework. It provides a simple and efficient way to get started with building a backend application.
+> **🚀 Production Ready** - This tool is stable and actively maintained.
 
-Features
---------
+## Introduction
 
-* Support for multiple frameworks: Express.js, Express TS, FastAPI, Fiber, and Gin
-* Automatic installation of dependencies for each framework
-* Generation of boilerplate code for each framework
-* Easy to use CLI interface
+Backend Starter CLI is your command-line companion for rapidly scaffolding backend projects across multiple frameworks. Designed for developers who value efficiency, it brings the power of automated project setup directly to your terminal, eliminating the repetitive tasks of initial project configuration.
 
-Installation
-------------
+With a single command, generate production-ready boilerplate code, install dependencies, and start building your application immediately.
 
-To install Backend Starter CLI, run the following command:
+## Features
+
+* **Multi-Framework Support**: Express.js, Express TypeScript, FastAPI, Fiber, and Gin
+* **Zero-Config Setup**: Automatic dependency installation and environment configuration
+* **Production-Ready Templates**: Industry-standard project structure and best practices
+* **Cross-Platform Compatibility**: Works seamlessly on macOS, Linux, and Windows
+
+## Installation
+
+### macOS
+
+```bash
+brew tap Walon-Foundation/backend-starter-cli
+brew install backend-starter
 ```
-go get github.com/walonCode/backend-starter-cli
+
+### Linux
+
+1. Download the latest Linux binary from our [Releases page](https://github.com/Walon-Foundation/backend-starter-cli/releases)
+2. Extract the archive:
+   ```bash
+   tar -xvf backend-starter_0.1.1_linux_amd64.tar.gz
+   ```
+3. Install to your PATH:
+   ```bash
+   sudo mv ./backend-starter /usr/local/bin/
+   ```
+
+### Windows
+
+1. Download the latest Windows .tar.gz from our [Releases page](https://github.com/Walon-Foundation/backend-starter-cli/releases)
+2. Extract the archive:
+    ```
+    tar -xvf backend-starter_0.1.1_windows_amd64.tar.gz
+    ```
+3. Add the executable to your system PATH
+
+### Go Install (Universal)
+
+```bash
+go install github.com/Walon-Foundation/backend-starter@latest
 ```
-Usage
------
 
-To use Backend Starter CLI, simply run the command `backend-starter-cli` followed by the framework you want to use, for example:
+## Usage
+
+```bash
+# Create a new project
+backend-starter init
+
+# Show help information
+backend-starter-cli help
+
+# Display version information
+backend-starter-cli version
 ```
-backend-starter-cli express-js
-```
-This will generate a new Express.js backend project with all necessary dependencies installed.
 
-Technologies
-------------
+## Supported Frameworks
 
-* Go 1.24.4
-* Cobra 1.9.1
-* Various frameworks (Express.js, Express TS, FastAPI, Fiber, and Gin)
+- **Express.js** - Minimal JavaScript setup with essential middleware
+- **Express TypeScript** - Type-safe Express with pre-configured TypeScript
+- **FastAPI** - Python framework with modern Python features
+- **Fiber** - Express-inspired web framework built on Go's Fasthttp
+- **Gin** - High-performance HTTP web framework for Go
 
-Configuration and Environment
-------------------------------
+## Project Structure
 
-The project uses a `.gitignore` file to ignore unnecessary files and a `go.mod` file to manage dependencies. There is no specific environment configuration required to use this project.
+Each generated project includes:
+- Production-ready boilerplate code
+- Framework-specific configuration files
+- Pre-concluded dependency management (package.json, go.mod, requirements.txt)
+- Environment setup and gitignore files
+- Example entry point with basic server setup
 
-Folder Structure
-----------------
+## Technologies
 
-```
-.
-├── .gitignore
-├── LICENSE
-├── README.md
-├── cmd
-│   ├── init.go
-│   ├── root.go
-│   └── version.go
-├── go.mod
-├── go.sum
-├── internals
-│   ├── extra-dependencies
-│   │   ├── dependencyList.go
-│   │   └── extra.go
-│   ├── frameworks
-│   │   └── framework.go
-│   ├── prompt
-│   │   └── prompt.go
-│   ├── runner
-│   │   └── installDependencies.go
-│   └── scaffold
-│       ├── createFolder.go
-│       └── template.go
-├── main.go
-└── templates
-    ├── express-js
-    │   ├── .gitignore
-    │   ├── package.json
-    │   └── src
-    │       └── index.js
-    ├── express-ts
-    │   ├── .gitignore
-    │   ├── nodemon.json
-    │   ├── package.json
-    │   └── src
-    │       └── index.ts
-    │   └── tsconfig.json
-    ├── fastapi
-    │   └── main.py
-    ├── fiber
-    │   ├── .air.toml
-    │   ├── .gitignore
-    │   ├── go.mod
-    │   ├── go.sum
-    │   └── main.go
-    └── gin
-        ├── .air.toml
-        ├── .gitignore
-        ├── go.mod
-        ├── go.sum
-        └── main.go
-```
-Authors
--------
+* **Go 1.24.4** - Core CLI implementation language
+* **Cobra 1.9.1** - Powerful CLI framework
+* **Framework-specific stacks** - Each template uses industry-standard dependencies
 
-* [walonCode](https://github.com/walonCode) (github handle)
+## Contributing
 
-Contribution Instructions
--------------------------
+We welcome contributions! Please feel free to submit pull requests, report bugs, or suggest new features.
 
-If you want to contribute to Backend Starter CLI, please fork the repository, make your changes, and submit a pull request.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Thank you for using Backend Starter CLI!
+## Authors
+
+* **[walonCode](https://github.com/walonCode)** - Creator and maintainer
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+If you encounter any issues or have questions, please file an issue on our [GitHub Issues page](https://github.com/Walon-Foundation/backend-starter-cli/issues).
+
+---
+
+**Thank you for using Backend Starter CLI!** Start building amazing backend applications faster than ever before.
