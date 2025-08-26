@@ -16,8 +16,7 @@ before:
 builds:
   - id: mac-build
     binary: backend-starter
-    main: ./main.go   
-      - CGO_ENABLED=0
+    main: ./main.go
     goos:
       - darwin
     goarch:
