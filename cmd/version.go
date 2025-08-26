@@ -11,7 +11,7 @@ var versionCmd = &cobra.Command{
 	Use: "version",
 	Short: "Print version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(version)
+		fmt.Println("Backend-Starter CLI v0.1.0")
 	},
 }
 

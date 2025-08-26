@@ -9,7 +9,6 @@ import (
 
 
 var( 
-	version = "dev"
 	rootCmd = &cobra.Command{
 		Use:   "backend-starter",
 		Short: "Scaffold backedn starter project",
