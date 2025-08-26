@@ -46,7 +46,6 @@ func AskProjectName()(string, error){
 
 
 func SelectDependecies(options []string)([]string, error){
-	fmt.Println(options)
 	fmt.Println("Select additional dependencies..")
 
 	for i, opts := range options{
