@@ -1,51 +1,94 @@
 version: 2
 
+project_name: backend-starter
+
+checksum:
+  disable: true
+
+changelog:
+  disable: true
+
 before:
   hooks:
     - go mod tidy
+    - go generate ./...
+
 
 builds:
-  - id: backend-starter
-    main: ./    
+  - id: mac-build
     binary: backend-starter
-    env:
+    main: ./main.go   
       - CGO_ENABLED=0
     goos:
-      - linux
-      - windows
       - darwin
     goarch:
       - amd64
       - arm64
+    flags:
+      - -trimpath
+
+  - id: linux-build
+    binary: backend-starter
+    main: ./main.go
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+
+  - id: windows-build
+    binary: backend-starter
+    main: ./main.go
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+    goarch:
+      - amd64
+    flags:
+      - -trimpath
 
 archives:
-  - id: archive
-    format: tar.gz
-    name_template: >-
-      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
-    format_overrides:
-      - goos: windows
-        format: zip
+  - id: mac-archive
+    builds: [mac-build]
+    name_template: "backend-starter_{{ .Version }}_macOS_{{ .Arch }}"
+    wrap_in_directory: true
+    files:
+      - none*
 
-changelog:
-  sort: asc
-  filters:
-    exclude:
-      - "^docs:"
-      - "^test:"
+  - id: linux-archive
+    builds: [linux-build]
+    name_template: "backend-starter_{{ .Version }}_linux_{{ .Arch }}"
+    wrap_in_directory: true
+    files:
+      - none*
+
+  - id: windows-archive
+    builds: [windows-build]
+    name_template: "backend-starter_{{ .Version }}_windows_{{ .Arch }}"
+    wrap_in_directory: true
+    files:
+      - none*
+
 
 brews:
   - name: backend-starter
-    tap:
+    ids:
+      - mac-archive
+    repository:
       owner: Walon-Foundation
-      name: homebrew-tap  
-    commit_author:
-      name: CI Bot
-      email: ci@example.com
-    description: "A backend starter CLI written in Go"
+      name: homebrew-tap
     homepage: "https://github.com/Walon-Foundation/backend-starter-cli"
+    license: Apache-2.0
+
 
 release:
+  mode: keep-existing
+  replace_existing_artifacts: true
   github:
-    owner: Walon-Foundation  
+    owner: Walon-Foundation
     name: backend-starter-cli
