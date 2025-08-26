@@ -6,7 +6,7 @@
 
 **Accelerate your backend development with terminal-driven project scaffolding and setup.**
 
-> **🚀 Production Ready** - This tool is stable and actively maintained.
+**🚀 Production Ready** - This tool is stable and actively maintained.
 
 ## Introduction
 
@@ -35,7 +35,7 @@ brew install WalonFoundation/backend-starter-cli/backend-starter
 1. Download the latest Linux binary from our [Releases page](https://github.com/Walon-Foundation/backend-starter-cli/releases)
 2. Extract the archive:
    ```bash
-   tar -xvf backend-starter_0.1.1_linux_amd64.tar.gz
+   tar -xvf backend-starter_x.x.x_linux_amd64.tar.gz
    ```
 3. Install to your PATH:
    ```bash
@@ -47,7 +47,7 @@ brew install WalonFoundation/backend-starter-cli/backend-starter
 1. Download the latest Windows .tar.gz from our [Releases page](https://github.com/Walon-Foundation/backend-starter-cli/releases)
 2. Extract the archive:
     ```
-    tar -xvf backend-starter_0.1.1_windows_amd64.tar.gz
+    tar -xvf backend-starter_x_x_x_windows_amd64.tar.gz
     ```
 3. Add the executable to your system PATH
 
