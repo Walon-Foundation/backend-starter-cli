@@ -1,42 +1,49 @@
 package scaffold
 
 import (
-	"io"
+	"embed"
+	"io/fs"
 	"os"
 	"path/filepath"
 )
 
+//go:embed templates
+var templatesFS embed.FS
 
-func CopyTemplate(srcDir, destDir string)error{
-	return filepath.Walk(srcDir, func(path string, info os.FileInfo, err error) error {
+// CopyTemplate copies embedded scaffold files of a given framework to destDir
+func CopyTemplate(framework, destDir string) error {
+	frameworkDir := "templates/" + framework
+
+	return fs.WalkDir(templatesFS, frameworkDir, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
 
-		if info.IsDir(){
+		// Skip directories, only copy files
+		if d.IsDir() {
 			return nil
 		}
 
-		relPath,_ := filepath.Rel(srcDir, path)
-		destDir := filepath.Join(destDir, relPath)
-
-		if err := os.MkdirAll(filepath.Dir(destDir), 0775); err != nil {
-			return err
-		}
-
-		srcFile,err := os.Open(path)
+		// Relative path inside the framework folder
+		relPath, err := filepath.Rel(frameworkDir, path)
 		if err != nil {
 			return err
 		}
-		defer srcFile.Close()
 
-		defFile,err := os.Create(destDir)
+		destPath := filepath.Join(destDir, relPath)
+
+		// Make sure parent directories exist
+		if err := os.MkdirAll(filepath.Dir(destPath), 0775); err != nil {
+			return err
+		}
+
+		// Read file from embedded FS
+		data, err := templatesFS.ReadFile(path)
 		if err != nil {
 			return err
 		}
-		defer defFile.Close()
 
-		_, err = io.Copy(defFile, srcFile)
-		return err
+		// Write file to destination
+		return os.WriteFile(destPath, data, 0664)
 	})
 }

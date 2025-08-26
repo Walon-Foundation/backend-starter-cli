@@ -106,8 +106,7 @@ var initCmd = &cobra.Command{
 			}
 			
 			fmt.Printf("Copying the template for %s\n", stack)
-			srcDir := filepath.Join("templates", selectedFramework.TemplateDir)
-			if err := scaffold.CopyTemplate(srcDir, projectPath); err != nil {
+			if err := scaffold.CopyTemplate(stack, projectPath); err != nil {
 				fmt.Printf("Error copying template: %v\n", err)
 				return
 			}
