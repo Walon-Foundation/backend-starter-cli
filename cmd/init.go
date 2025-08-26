@@ -7,22 +7,12 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	extradependencies "github.com/walonCode/backend-starter-cli/internals/extra-dependencies"
 	"github.com/walonCode/backend-starter-cli/internals/frameworks"
 	"github.com/walonCode/backend-starter-cli/internals/prompt"
+	"github.com/walonCode/backend-starter-cli/internals/runner"
 	"github.com/walonCode/backend-starter-cli/internals/scaffold"
 )
-
-var FrameworkDeps = map[string][]string{
-	"express-js": {"dotenv", "drizzle", "prisma", "eslint","nodemon","mongodb", "cors", "zod"},
-	"express-ts": {"dotenv", "jest", "prisma", "eslint", "drizzle","nodemon", "cors", "zod"},
-	"gin":        {"gorm", "jwt-go", "godotenv", "validator"},
-	"fastapi":    {"pydantic", "sqlalchemy", "alembic", "python-dotenv"},
-	"nextjs":     {"drizzle", "prisma", "clerk", "supabase", "zod"},
-	"hono":       {"dotenv", "mongodb","drizzle", "prisma", "eslint","zod", "mongodb",},
-	"fiber":      {"godotenv", "jwt-go", "gorm", "validator"},
-	"nestjs":     {"dotenv", "jsonwebtoken", "prisma", "drizzle","eslint","zod", "mongodb"},
-}
-
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
@@ -52,7 +42,7 @@ var initCmd = &cobra.Command{
 		fmt.Printf("Selected stack: %s\n", stack)
 
 
-		extras := FrameworkDeps[stack]
+		extras := extradependencies.FrameworkDeps[stack]
 		deps, err := prompt.SelectDependecies(extras)
 		if err != nil {
 			fmt.Printf("Error selecting dependencies: %v\n", err)
@@ -84,27 +74,29 @@ var initCmd = &cobra.Command{
 			fmt.Printf("Running the official cli for %s\n", stack)
 
 			cliArgs := append(selectedFramework.CliCommand[1:], projectName)
+
+			currentDir,err := os.Getwd()
+			if err != nil {
+				return
+			}
 			
 			cmd := exec.Command(selectedFramework.CliCommand[0], cliArgs...)
 			cmd.Stdout = os.Stdout
 			cmd.Stdin = os.Stdin
 			cmd.Stderr = os.Stderr
-			cmd.Dir, _ = os.Getwd() 
+			cmd.Dir = currentDir
 			
 			if err := cmd.Run(); err != nil {
 				fmt.Printf("Error running CLI command: %v\n", err)
 				return
 			}
 			
-			projectPath := filepath.Join(".", projectName)
+			projectPath := filepath.Join(currentDir, projectName)
 			
-			if err := os.Chdir(projectPath); err != nil {
-				fmt.Printf("Error changing to project directory: %v\n", err)
+			if err := runner.InstallDeps(stack, projectPath, deps);err != nil {
+				fmt.Printf("Error in installing the packages: %v\n",err)
 				return
 			}
-			
-			// TODO: Install additional dependencies based on user selection
-			fmt.Printf("Project created at: %s\n", projectPath)
 			
 		} else {
 			projectPath, err := scaffold.CreateProjectDir(projectName)
@@ -125,7 +117,10 @@ var initCmd = &cobra.Command{
 				return
 			}
 			
-			// TODO: Install additional dependencies based on user selection
+			if err := runner.InstallDeps(stack, projectPath, deps);err != nil {
+				fmt.Printf("Error in installing the packages: %v\n",err)
+				return
+			}
 		}
 
 	
