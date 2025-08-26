@@ -82,15 +82,8 @@ homebrew_casks:
       name: homebrew-tap
     homepage: "https://github.com/Walon-Foundation/backend-starter-cli"
     license: MIT
-    folder: Formula 
-    description: "Backend starter CLI tool"
-    github:
-      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
 
 
 release:
   mode: keep-existing
   replace_existing_artifacts: true
-  github:
-    owner: Walon-Foundation
-    name: backend-starter-cli
