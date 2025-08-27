@@ -122,7 +122,17 @@ var initCmd = &cobra.Command{
 				fmt.Printf("Error in installing the database: %v\n",err)
 			}
 
-			//ask for valid
+			
+			//asking for a validator
+			validatorList := extras.ValidationList[name]
+			validatorName, err := prompt.AskForValidator(validatorList)
+			if err != nil {
+				fmt.Println("Error in choosing a validator libray: ",err)
+			}
+
+			if err := runner.RunValidator(projectPath, stackType, validatorName); err != nil {
+				fmt.Println("Error in installing the validator: ",err)
+			}
 
 			
 		} else {
@@ -197,6 +207,18 @@ var initCmd = &cobra.Command{
 
 			if err := runner.RunDatabase(projectPath, stackType,dbName); err != nil {
 				fmt.Printf("Error in installing the database: %v\n",err)
+			}
+
+
+			//asking for a validator
+			validatorList := extras.ValidationList[name]
+			validatorName, err := prompt.AskForValidator(validatorList)
+			if err != nil {
+				fmt.Println("Error in choosing a validator libray: ",err)
+			}
+
+			if err := runner.RunValidator(projectPath, stackType, validatorName); err != nil {
+				fmt.Println("Error in installing the validator: ",err)
 			}
 		}
 
