@@ -12,6 +12,12 @@ import (
 //go:embed templates/* templates
 var templatesFS embed.FS
 
+var renameFiles = map[string]string{
+	"gitignore":".gitignore",
+	"env" : ".env",
+	"air.toml":".air.toml",
+}
+
 // // CopyTemplate copies embedded scaffold files of a given framework to destDir
 func CopyTemplate(framework, destDir string) error {
 	frameworkDir := "templates/" + framework
@@ -30,6 +36,10 @@ func CopyTemplate(framework, destDir string) error {
 		relPath, err := filepath.Rel(frameworkDir, path)
 		if err != nil {
 			return err
+		}
+
+		if newName, ok := renameFiles[relPath]; ok {
+			relPath = newName
 		}
 
 		destPath := filepath.Join(destDir, relPath)
