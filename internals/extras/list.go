@@ -1,20 +1,20 @@
 package extras
 
 var DatabaseList = map[string][]string{
-	"node":    {"prisma", "drizzle", "mongodb", "postgresql"},
-	"go":      {"sqlite", "postgresql", "mongodb"},
-	"fastapi": {"sqlite3", "postgresql", "mongodb"},
+	"node":    {"prisma", "drizzle", "mongodb", "postgresql", "none"},
+	"go":      {"sqlite", "postgresql", "mongodb", "none"},
+	"fastapi": {"sqlite3", "postgresql", "mongodb", "none"},
 }
 
 var DatabaseListInfo = map[string]map[string][]string{
 	// Node.js (JS/TS)
 	"drizzle": {
-		"js":  {"npm", "install", "drizzle-orm", "pg", "drizzle-kit", "tsx"},
-		"ts":  {"npm", "install", "drizzle-orm", "pg", "drizzle-kit", "tsx", "@types/pg"},
+		"js": {"npm", "install", "drizzle-orm", "pg", "drizzle-kit", "tsx"},
+		"ts": {"npm", "install", "drizzle-orm", "pg", "drizzle-kit", "tsx", "@types/pg"},
 	},
 	"prisma": {
-		"js": {"npx", "prisma", "init", "--datasource-provider", "postgresql"},
-		"ts": {"npx", "prisma", "init", "--datasource-provider", "postgresql"},
+		"js": {"npm", "install", "prisma", "@prisma/client"},
+		"ts": {"npm", "install", "prisma", "@prisma/client"},
 	},
 	"mongodb": {
 		"js": {"npm", "install", "mongodb"},

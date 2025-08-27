@@ -16,5 +16,5 @@ var All = []Framework{
 	// If we add frameworks with official CLIs:
 	{Name: "hono", UseOfficial: true, CliCommand: []string{"npx", "create-hono@latest"}},
 	{Name: "nextjs", UseOfficial: true, CliCommand: []string{"npx", "create-next-app@latest"}},
-	{Name: "nestjs", UseOfficial: true, CliCommand: []string{"npx", "@nestjs/cli@latest"}},
+	{Name: "nestjs", UseOfficial: true, CliCommand: []string{"npx", "@nestjs/cli", "new"}},
 }
