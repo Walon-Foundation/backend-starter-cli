@@ -10,6 +10,11 @@ import (
 
 // RunDatabase installs DB dependencies based on stack + dbName
 func RunDatabase(projectDir, stack, dbName string) error {
+	if dbName == "none" {
+		fmt.Println("No database selected")
+		return nil
+	}
+
 	dbInfo, ok := extras.DatabaseListInfo[dbName]
 	if !ok {
 		return fmt.Errorf("unknown database: %s", dbName)
