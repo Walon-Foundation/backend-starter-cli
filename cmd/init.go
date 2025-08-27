@@ -156,10 +156,6 @@ var initCmd = &cobra.Command{
 			fmt.Println("Initializing the project....................")
 			switch stack {
 			case "gin", "fiber":
-				if err := runner.RunCommand(projectPath, "go", "mod", "init"); err != nil {
-					fmt.Printf("Error install the dependencies: %v\n",err)
-				}
-
 				if err := runner.RunCommand(projectPath, "go", "mod", "tidy"); err != nil {
 				fmt.Printf("Error install the dependencies: %v\n",err)
 			}
