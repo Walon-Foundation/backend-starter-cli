@@ -122,6 +122,8 @@ var initCmd = &cobra.Command{
 				fmt.Printf("Error in installing the database: %v\n",err)
 			}
 
+			//ask for valid
+
 			
 		} else {
 			projectPath, err := scaffold.CreateProjectDir(projectName)
