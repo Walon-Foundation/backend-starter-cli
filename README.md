@@ -27,7 +27,7 @@ With a single command, generate production-ready boilerplate code, install depen
 
 ```bash
 brew tap Walon-Foundation/backend-starter-cli
-brew install Walon-Foundation/backend-starter-cli/backend-starter
+brew install --cask backend-starter
 ```
 
 ### Linux
