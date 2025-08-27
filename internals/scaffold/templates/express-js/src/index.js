@@ -1,9 +1,16 @@
 import express  from "express"
+import cors from "cors"
+import { corsoptions } from "./configs/corsOptions"
+import { config } from "dotenv"
+
+config()
 
 const app = express()
 
 //middleware 
 app.use(express.json())
+app.use(cors(corsoptions))
+
 
 //test route
 app.get("/", async(req,res) => {
@@ -11,6 +18,7 @@ app.get("/", async(req,res) => {
 })
 
 //starting point
-app.listen(3000, () => {
-    console.log(`server in running on http://localhost:${3000}`)
+const PORT = process.env.PORT
+app.listen(PORT, () => {
+    console.log(`server in running on http://localhost:${PORT}`)
 })
