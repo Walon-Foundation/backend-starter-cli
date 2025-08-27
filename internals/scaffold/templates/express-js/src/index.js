@@ -1,6 +1,6 @@
 import express  from "express"
 import cors from "cors"
-import { corsoptions } from "./configs/corsOptions"
+import { corsOptions } from "./configs/corsOptions.js"
 import { config } from "dotenv"
 
 config()
@@ -9,7 +9,7 @@ const app = express()
 
 //middleware 
 app.use(express.json())
-app.use(cors(corsoptions))
+app.use(cors(corsOptions))
 
 
 //test route
