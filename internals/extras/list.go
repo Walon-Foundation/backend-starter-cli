@@ -115,3 +115,36 @@ var AuthProviderListInfo = map[string]map[string][]string{
 		"fastapi": {"pip", "install", "okta"},
 	},
 }
+
+
+
+var LinterList = map[string][]string{
+	"node":    {"eslint", "prettier", "standard", "none"},
+	"go":      {"golangci-lint", "none"},
+	"fastapi": {"flake8", "black", "none"},
+}
+
+var LinterListInfo = map[string]map[string][]string{
+	"eslint": {
+		"js": {"npm", "install", "eslint", "--save-dev"},
+		"ts": {"npm", "install", "eslint", "--save-dev", "@typescript-eslint/parser", "@typescript-eslint/eslint-plugin"},
+	},
+	"prettier": {
+		"js": {"npm", "install", "prettier", "--save-dev"},
+		"ts": {"npm", "install", "prettier", "--save-dev"},
+	},
+	"standard": {
+		"js": {"npm", "install", "standard", "--save-dev"},
+		"ts": {"npm", "install", "standard", "--save-dev"},
+	},
+	"golangci-lint": {
+		"go": {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@latest"},
+	},
+	"flake8": {
+		"fastapi": {"pip", "install", "flake8"},
+	},
+	"black": {
+		"fastapi": {"pip", "install", "black"},
+	},
+}
+

@@ -9,7 +9,7 @@ import (
 )
 
 func SelectBackend(options []string)(string, error){
-	fmt.Println("-----Choose a backend starter------")
+	fmt.Println("----- Choose a backend starter ------")
 
 	for i, opt := range options {
 		fmt.Printf("%d), %s\n",i+1, opt)
@@ -33,6 +33,7 @@ func SelectBackend(options []string)(string, error){
 	return options[choice -1], nil
 }
 
+
 func AskProjectName()(string, error){
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter project name: ")
@@ -47,7 +48,7 @@ func AskProjectName()(string, error){
 
 //ask for database
 func AskDatabase( option []string)(string, error){
-	fmt.Println("-----Choice a database------")
+	fmt.Println("----- Choice a database ------")
 	for i, opt := range option {
 		fmt.Printf(" %d). %s\n",i+1, opt)
 	}
@@ -70,7 +71,7 @@ func AskDatabase( option []string)(string, error){
 
 //ask for auth
 func AskForAuth(options []string)(string,error){
-	fmt.Println("-----Choose an Authentication libray-----")
+	fmt.Println("----- Choose an Authentication libray -----")
 	for i ,opt := range options{
 		fmt.Printf(" %d). %v\n",i+1, opt)
 	}
@@ -92,9 +93,32 @@ func AskForAuth(options []string)(string,error){
 }
 
 //ask for linting
+func AskForLinting(options []string)(string,error){
+	fmt.Println("----- Choose a Linting libray -----")
+	for i ,opt := range options{
+		fmt.Printf(" %d). %v\n",i+1, opt)
+	}
+
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Printf("Enter your choice: ")
+	input,err := reader.ReadString('\n')
+	if err != nil {
+		return "",err
+	}
+	input = strings.TrimSpace(input)
+
+	choice,err := strconv.Atoi(input)
+	if err != nil && choice > len(options) && choice < 1 {
+		return "", nil
+	}
+
+	return options[choice - 1], nil
+}
+
+
 //ask for validation
 func AskForValidator(options []string)(string,error){
-	fmt.Println("-----Choose a Validator libray-----")
+	fmt.Println("----- Choose a Validator libray -----")
 	for i ,opt := range options{
 		fmt.Printf(" %d). %v\n",i+1, opt)
 	}

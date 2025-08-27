@@ -240,6 +240,17 @@ var initCmd = &cobra.Command{
 				fmt.Println("Error in installing the auth library: ",err)
 			}
 
+			//asking for linting
+			lintList := extras.LinterList[name]
+			lintName,err := prompt.AskForLinting(lintList)
+			if err != nil {
+				fmt.Println("Error choosing a linting library")
+			}
+
+			if err := runner.RunLint(projectPath, stackType, lintName);err != nil {
+				fmt.Println("Error installing the linting library: ",err)
+			}
+
 		}
 
 	
@@ -250,6 +261,8 @@ var initCmd = &cobra.Command{
 				fmt.Println("Git repository initialized")
 			}
 		}
+
+		fmt.Println("-------- Project Created successfully --------")
 	},
 }
 
