@@ -1,7 +1,7 @@
 package extras
 
 var DatabaseList = map[string][]string{
-	"node":    {"prisma", "drizzle", "mongodb", "postgresql", "none"},
+	"node":    {"prisma", "drizzle", "mongodb", "none"},
 	"go":      {"sqlite", "postgresql", "mongodb", "none"},
 	"fastapi": {"sqlite3", "postgresql", "mongodb", "none"},
 }
