@@ -134,6 +134,16 @@ var initCmd = &cobra.Command{
 				fmt.Println("Error in installing the validator: ",err)
 			}
 
+			//ask for authentication
+			authList := extras.AuthProviderList[name]
+			authName, err := prompt.AskForValidator(authList)
+			if err != nil {
+				fmt.Println("Error choosing an auth library: ",err)
+			}
+
+			if err := runner.RunAuth(projectPath, stackType, authName);err != nil {
+				fmt.Println("Error in installing the auth library: ",err)
+			}
 			
 		} else {
 			projectPath, err := scaffold.CreateProjectDir(projectName)
@@ -216,6 +226,20 @@ var initCmd = &cobra.Command{
 			if err := runner.RunValidator(projectPath, stackType, validatorName); err != nil {
 				fmt.Println("Error in installing the validator: ",err)
 			}
+
+			//asking for auth
+
+			//ask for authentication
+			authList := extras.AuthProviderList[name]
+			authName, err := prompt.AskForValidator(authList)
+			if err != nil {
+				fmt.Println("Error choosing an auth library: ",err)
+			}
+
+			if err := runner.RunAuth(projectPath, stackType, authName);err != nil {
+				fmt.Println("Error in installing the auth library: ",err)
+			}
+
 		}
 
 	

@@ -70,3 +70,48 @@ var ValidationListInfo = map[string]map[string][]string{
 }
 
 
+
+var AuthProviderList = map[string][]string{
+	"node":    {"jwt", "clerk", "auth0", "supabase", "firebase", "okta", "none"},
+	"go":      {"jwt", "auth0", "supabase", "firebase", "okta", "none"},
+	"fastapi": {"jwt", "auth0", "supabase", "firebase", "okta", "none"},
+}
+
+
+
+var AuthProviderListInfo = map[string]map[string][]string{
+	"jwt": {
+		"js":      {"npm", "install", "jsonwebtoken", "bcryptjs"},
+		"ts":      {"npm", "install", "jsonwebtoken", "bcryptjs", "@types/jsonwebtoken", "@types/bcryptjs"},
+		"go":      {"go", "get", "github.com/golang-jwt/jwt/v5"},
+		"fastapi": {"pip", "install", "python-jose", "passlib[bcrypt]"},
+	},
+	"clerk": {
+		"js":      {"npm", "install", "@clerk/clerk-sdk-node"},
+		"ts":      {"npm", "install", "@clerk/clerk-sdk-node"},
+	},
+	"auth0": {
+		"js":      {"npm", "install", "express-jwt", "jwks-rsa"},
+		"ts":      {"npm", "install", "express-jwt", "jwks-rsa", "@types/express-jwt"},
+		"go":      {"go", "get", "github.com/auth0/go-jwt-middleware"},
+		"fastapi": {"pip", "install", "python-jose", "requests"},
+	},
+	"supabase": {
+		"js":      {"npm", "install", "@supabase/supabase-js"},
+		"ts":      {"npm", "install", "@supabase/supabase-js"},
+		"go":      {"go", "get", "github.com/golang-jwt/jwt/v5"}, // verify Supabase JWTs
+		"fastapi": {"pip", "install", "supabase-py", "python-jose"},
+	},
+	"firebase": {
+		"js":      {"npm", "install", "firebase-admin"},
+		"ts":      {"npm", "install", "firebase-admin", "@types/firebase-admin"},
+		"go":      {"go", "get", "firebase.google.com/go"},
+		"fastapi": {"pip", "install", "firebase-admin"},
+	},
+	"okta": {
+		"js":      {"npm", "install", "@okta/okta-sdk-nodejs", "@okta/okta-auth-js"},
+		"ts":      {"npm", "install", "@okta/okta-sdk-nodejs", "@okta/okta-auth-js"},
+		"go":      {"go", "get", "github.com/okta/okta-jwt-verifier-golang"},
+		"fastapi": {"pip", "install", "okta"},
+	},
+}

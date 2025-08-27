@@ -69,6 +69,28 @@ func AskDatabase( option []string)(string, error){
 }
 
 //ask for auth
+func AskForAuth(options []string)(string,error){
+	fmt.Println("-----Choose an Authentication libray-----")
+	for i ,opt := range options{
+		fmt.Printf(" %d). %v\n",i+1, opt)
+	}
+
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Printf("Enter your choice: ")
+	input,err := reader.ReadString('\n')
+	if err != nil {
+		return "",err
+	}
+	input = strings.TrimSpace(input)
+
+	choice,err := strconv.Atoi(input)
+	if err != nil && choice > len(options) && choice < 1 {
+		return "", nil
+	}
+
+	return options[choice - 1], nil
+}
+
 //ask for linting
 //ask for validation
 func AskForValidator(options []string)(string,error){
