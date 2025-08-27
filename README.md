@@ -26,7 +26,7 @@ With a single command, generate production-ready boilerplate code, install depen
 ### macOS
 
 ```bash
-brew tap Walon-Foundation/backend-starter-cli
+brew tap Walon-Foundation/homebrew-tap
 brew install --cask backend-starter
 ```
 
