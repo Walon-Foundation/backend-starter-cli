@@ -17,6 +17,9 @@ builds:
   - id: mac-build
     binary: backend-starter
     main: ./main.go
+    ldflags: "-X github.com/walonCode/backend-starter-cli/cmd.Version={{.Version}}"
+    env:
+      - CGO_ENABLED=0
     goos:
       - darwin
     goarch:
@@ -28,6 +31,7 @@ builds:
   - id: linux-build
     binary: backend-starter
     main: ./main.go
+    ldflags: "-X github.com/walonCode/backend-starter-cli/cmd.Version={{.Version}}"
     env:
       - CGO_ENABLED=0
     goos:
@@ -41,6 +45,7 @@ builds:
   - id: windows-build
     binary: backend-starter
     main: ./main.go
+    ldflags: "-X github.com/walonCode/backend-starter-cli/cmd.Version={{.Version}}"
     env:
       - CGO_ENABLED=0
     goos:
