@@ -14,6 +14,19 @@ Backend Starter CLI is your command-line companion for rapidly scaffolding backe
 
 With a single command, generate production-ready boilerplate code, install dependencies, and start building your application immediately.
 
+## Prerequisites
+
+Before using Backend Starter CLI, make sure you have the following installed:
+
+* **Node.js** (v18 or later) – Required for JavaScript/TypeScript frameworks
+  [Download Node.js](https://nodejs.org/)
+* **Go** (v1.24.4 or later) – Required for Go frameworks (Fiber, Gin)
+  [Download Go](https://golang.org/dl/)
+* **Python** (v3.10 or later) – Required for FastAPI projects
+  [Download Python](https://www.python.org/downloads/)
+* **Git** – Required for version control and template initialization
+  [Download Git](https://git-scm.com/downloads)
+
 ## Features
 
 * **Multi-Framework Support**: Express.js, Express TypeScript, FastAPI, Fiber, and Gin
@@ -34,10 +47,12 @@ brew install --cask backend-starter
 
 1. Download the latest Linux binary from our [Releases page](https://github.com/Walon-Foundation/backend-starter-cli/releases)
 2. Extract the archive:
+
    ```bash
    tar -xvf backend-starter_x.x.x_linux_amd64.tar.gz
    ```
 3. Install to your PATH:
+
    ```bash
    sudo mv ./backend-starter /usr/local/bin/
    ```
@@ -46,9 +61,10 @@ brew install --cask backend-starter
 
 1. Download the latest Windows .tar.gz from our [Releases page](https://github.com/Walon-Foundation/backend-starter-cli/releases)
 2. Extract the archive:
-    ```
-    tar -xvf backend-starter_x_x_x_windows_amd64.tar.gz
-    ```
+
+   ```bash
+   tar -xvf backend-starter_x_x_x_windows_amd64.tar.gz
+   ```
 3. Add the executable to your system PATH
 
 ### Go Install (Universal)
@@ -72,20 +88,21 @@ backend-starter-cli version
 
 ## Supported Frameworks
 
-- **Express.js** - Minimal JavaScript setup with essential middleware
-- **Express TypeScript** - Type-safe Express with pre-configured TypeScript
-- **FastAPI** - Python framework with modern Python features
-- **Fiber** - Express-inspired web framework built on Go's Fasthttp
-- **Gin** - High-performance HTTP web framework for Go
+* **Express.js** - Minimal JavaScript setup with essential middleware
+* **Express TypeScript** - Type-safe Express with pre-configured TypeScript
+* **FastAPI** - Python framework with modern Python features
+* **Fiber** - Express-inspired web framework built on Go's Fasthttp
+* **Gin** - High-performance HTTP web framework for Go
 
 ## Project Structure
 
 Each generated project includes:
-- Production-ready boilerplate code
-- Framework-specific configuration files
-- Pre-concluded dependency management (package.json, go.mod, requirements.txt)
-- Environment setup and gitignore files
-- Example entry point with basic server setup
+
+* Production-ready boilerplate code
+* Framework-specific configuration files
+* Pre-configured dependency management (`package.json`, `go.mod`, `requirements.txt`)
+* Environment setup and `.gitignore` files
+* Example entry point with basic server setup
 
 ## Technologies
 
@@ -118,3 +135,6 @@ If you encounter any issues or have questions, please file an issue on our [GitH
 ---
 
 **Thank you for using Backend Starter CLI!** Start building amazing backend applications faster than ever before.
+
+---
+
