@@ -35,3 +35,38 @@ var DatabaseListInfo = map[string]map[string][]string{
 		"fastapi": {"pip", "install", "aiosqlite"},
 	},
 }
+
+
+var ValidationList = map[string][]string{
+	"node":    {"zod", "yup", "joi", "class-validator", "none"},
+	"fastapi": {"pydantic", "none"},
+	"go":      {"go-playground/validator", "none"},
+}
+
+
+var ValidationListInfo = map[string]map[string][]string{
+	"zod": {
+		"js": {"npm", "install", "zod"},
+		"ts": {"npm", "install", "zod"}, 
+	},
+	"yup": {
+		"js": {"npm", "install", "yup"},
+		"ts": {"npm", "install", "yup", "@types/yup"},
+	},
+	"joi": {
+		"js": {"npm", "install", "joi"},
+		"ts": {"npm", "install", "joi", "@types/joi"},
+	},
+	"class-validator": {
+		"js": {"npm", "install", "class-validator", "class-transformer"}, // works but not common in JS-only
+		"ts": {"npm", "install", "class-validator", "class-transformer"},
+	},
+	"pydantic": {
+		"fastapi": {"pip", "install", "pydantic"},
+	},
+	"go-playground/validator": {
+		"go": {"go", "get", "github.com/go-playground/validator/v10"},
+	},
+}
+
+
