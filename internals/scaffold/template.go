@@ -7,10 +7,12 @@ import (
 	"path/filepath"
 )
 
-//go:embed templates
+
+
+//go:embed templates/* templates
 var templatesFS embed.FS
 
-// CopyTemplate copies embedded scaffold files of a given framework to destDir
+// // CopyTemplate copies embedded scaffold files of a given framework to destDir
 func CopyTemplate(framework, destDir string) error {
 	frameworkDir := "templates/" + framework
 
