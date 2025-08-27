@@ -45,39 +45,32 @@ func AskProjectName()(string, error){
 }
 
 
-func SelectDependecies(options []string)([]string, error){
-	fmt.Println("Select additional dependencies..")
-
-	for i, opts := range options{
-		fmt.Printf(" %d) %s\n", i+1, opts)
+//ask for database
+func AskDatabase( option []string)(string, error){
+	fmt.Println("Choice a database")
+	for i, opt := range option {
+		fmt.Printf(" %d). %s\n",i+1, opt)
 	}
-
-	fmt.Print("\n Enter numbers (eg 1,2,3): ")
 
 	reader := bufio.NewReader(os.Stdin)
-	input,err := reader.ReadString('\n')
+	fmt.Print("Enter you choice: ")
+	choice,err := reader.ReadString('\n')
+	if err != nil{
+		return "",err
+	}
+	choice = strings.TrimSpace(choice)
 
-	if err != nil {
-		return nil, err
+	value,err := strconv.Atoi(choice)
+	if err != nil && value > len(option) && value < 1 {
+		return "",err
 	}
 
-	input = strings.TrimSpace(input)
-
-	if input == "" {
-		return nil,nil
-	}
-
-	var dep []string
-
-	for _, part := range strings.Split(input, ","){
-		num, err := strconv.Atoi(strings.TrimSpace(part))
-		if err == nil && num >=1 && num <= len(options){
-			dep = append(dep, options[num - 1])
-		}
-	}
-
-	return  dep, nil
+	return option[value - 1], nil
 }
+
+//ask for auth
+//ask for linting
+//ask for validation
 
 
 func ConfirmGit()(bool, error){

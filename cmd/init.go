@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
-	extradependencies "github.com/walonCode/backend-starter-cli/internals/extra-dependencies"
+	"github.com/walonCode/backend-starter-cli/internals/extras"
 	"github.com/walonCode/backend-starter-cli/internals/frameworks"
 	"github.com/walonCode/backend-starter-cli/internals/prompt"
 	"github.com/walonCode/backend-starter-cli/internals/runner"
@@ -42,20 +42,12 @@ var initCmd = &cobra.Command{
 		fmt.Printf("Selected stack: %s\n", stack)
 
 
-		extras := extradependencies.FrameworkDeps[stack]
-		deps, err := prompt.SelectDependecies(extras)
-		if err != nil {
-			fmt.Printf("Error selecting dependencies: %v\n", err)
-			return
-		}
-
 		gitInit, err := prompt.ConfirmGit()
 		if err != nil {
 			fmt.Printf("Error confirming git: %v\n", err)
 			return
 		}
 
-		fmt.Printf("Selected dependencies: %v, Git init: %t\n", deps, gitInit)
 
 		var selectedFramework *frameworks.Framework
 		for i, opt := range frameworks.All {
@@ -98,10 +90,38 @@ var initCmd = &cobra.Command{
 				return
 			}
 
-			if err := runner.InstallDeps(stack, projectPath, deps);err != nil {
-				fmt.Printf("Error in installing the packages: %v\n",err)
-				return
+			//ask question again --database
+			var name = ""
+			switch stack{
+			case "hono","express-ts","express-js","nextjs","nestjs":
+				name = "node"
+			case "gin","fiber":
+				name = "go"
+			default:
+				name = "fastapi"		
 			}
+			list := extras.DatabaseList[name]
+			dbName,err := prompt.AskDatabase(list)
+			if err != nil {
+				fmt.Printf("Error in choice in a database: %v\n",err)
+			}
+
+			var stackType = ""
+			switch stack {
+			case "express-js":
+				stackType = "js"
+			case "gin","fiber":
+				stackType = "go"
+			case "fastapi":
+				stackType = "fastapi"
+			default:
+				stackType = "ts"			
+			}
+
+			if err := runner.RunDatabase(projectPath, stackType,dbName); err != nil {
+				fmt.Printf("Error in installing the database: %v\n",err)
+			}
+
 			
 		} else {
 			projectPath, err := scaffold.CreateProjectDir(projectName)
@@ -121,9 +141,60 @@ var initCmd = &cobra.Command{
 				return
 			}
 			
-			if err := runner.InstallDeps(stack, projectPath, deps);err != nil {
-				fmt.Printf("Error in installing the packages: %v\n",err)
-				return
+			fmt.Println("Initializing the project....................")
+			switch stack {
+			case "gin", "fiber":
+				if err := runner.RunCommand(projectPath, "go", "mod", "init"); err != nil {
+					fmt.Printf("Error install the dependencies: %v\n",err)
+				}
+
+				if err := runner.RunCommand(projectPath, "go", "mod", "tidy"); err != nil {
+				fmt.Printf("Error install the dependencies: %v\n",err)
+			}
+			case "express-js","express-ts":
+				if err := runner.RunCommand(projectPath, "npm", "install"); err != nil {
+					fmt.Printf("Error install the dependencies: %v\n",err)
+				}
+			case "fastapi":
+				if err := runner.RunCommand(projectPath, "pip", "install", "-r", "requirements.txt"); err != nil {
+					fmt.Printf("Error install the dependencies: %v\n",err)
+				}
+			default:
+				return		
+			}
+
+			fmt.Println("Project has being initialized successfully............")
+
+			//ask questions again -- database
+			var name = ""
+			switch stack{
+			case "hono","express-ts","express-js","nextjs","nestjs":
+				name = "node"
+			case "gin","fiber":
+				name = "go"
+			default:
+				name = "fastapi"		
+			}
+			list := extras.DatabaseList[name]
+			dbName,err := prompt.AskDatabase(list)
+			if err != nil {
+				fmt.Printf("Error in choice in a database: %v\n",err)
+			}
+
+			var stackType = ""
+			switch stack {
+			case "express-js":
+				stackType = "js"
+			case "gin","fiber":
+				stackType = "go"
+			case "fastapi":
+				stackType = "fastapi"
+			default:
+				stackType = "ts"			
+			}
+
+			if err := runner.RunDatabase(projectPath, stackType,dbName); err != nil {
+				fmt.Printf("Error in installing the database: %v\n",err)
 			}
 		}
 
