@@ -93,6 +93,11 @@ var initCmd = &cobra.Command{
 			
 			projectPath := filepath.Join(currentDir, projectName)
 			
+			if err := os.Chdir(projectPath); err != nil {
+				fmt.Printf("Error changing to project directory: %v\n", err)
+				return
+			}
+
 			if err := runner.InstallDeps(stack, projectPath, deps);err != nil {
 				fmt.Printf("Error in installing the packages: %v\n",err)
 				return
