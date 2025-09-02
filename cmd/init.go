@@ -41,6 +41,41 @@ var initCmd = &cobra.Command{
 
 		fmt.Printf("Selected stack: %s\n", stack)
 
+			// Detect OS
+		osName := runner.DectectOs()
+
+		// Decide required tool
+		var toolName string
+		switch stack {
+		case "gin", "fiber":
+			toolName = "Go"
+		case "fastapi":
+			toolName = "Python"
+		default:
+			toolName = "Node"
+		}
+
+		// Check if tool exists
+		if runner.IsInstalled(toolName) {
+			fmt.Println("✅ Required tool is already installed")
+		} else {
+			fmt.Println("⚠️ Required tool not found. Installing...")
+			installCmd := runner.InstallTool(toolName, osName)
+
+			if len(installCmd) == 0 {
+				fmt.Printf("Please install %s manually.\n", toolName)
+			} else {
+				install := exec.Command(installCmd[0], installCmd[1:]...)
+				install.Stdout = os.Stdout
+				install.Stderr = os.Stderr
+				install.Stdin = os.Stdin
+
+				if err := install.Run(); err != nil {
+					fmt.Printf("Error installing %s: %v\n", toolName, err)
+					return
+				}
+			}
+		}
 
 		gitInit, err := prompt.ConfirmGit()
 		if err != nil {
@@ -71,6 +106,8 @@ var initCmd = &cobra.Command{
 			if err != nil {
 				return
 			}
+
+
 			
 			cmd := exec.Command(selectedFramework.CliCommand[0], cliArgs...)
 			cmd.Stdout = os.Stdout
@@ -136,7 +173,7 @@ var initCmd = &cobra.Command{
 
 			//ask for authentication
 			authList := extras.AuthProviderList[name]
-			authName, err := prompt.AskForValidator(authList)
+			authName, err := prompt.AskForAuth(authList)
 			if err != nil {
 				fmt.Println("Error choosing an auth library: ",err)
 			}
@@ -152,7 +189,6 @@ var initCmd = &cobra.Command{
 				return
 			}
 			
-			fmt.Printf("Copying the template for %s\n", stack)
 			if err := scaffold.CopyTemplate(stack, projectPath); err != nil {
 				fmt.Printf("Error copying template: %v\n", err)
 				return
@@ -231,7 +267,7 @@ var initCmd = &cobra.Command{
 
 			//ask for authentication
 			authList := extras.AuthProviderList[name]
-			authName, err := prompt.AskForValidator(authList)
+			authName, err := prompt.AskForAuth(authList)
 			if err != nil {
 				fmt.Println("Error choosing an auth library: ",err)
 			}
