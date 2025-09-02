@@ -57,9 +57,9 @@ var initCmd = &cobra.Command{
 
 		// Check if tool exists
 		if runner.IsInstalled(toolName) {
-			fmt.Println("✅ Required tool is already installed")
+			fmt.Printf("✅ %s is already installed\n",toolName)
 		} else {
-			fmt.Println("⚠️ Required tool not found. Installing...")
+			fmt.Printf("⚠️ %s not found. Installing......\n",toolName)
 			installCmd := runner.InstallTool(toolName, osName)
 
 			if len(installCmd) == 0 {
