@@ -17,7 +17,7 @@ func RunLint(projectDir, stack, lintName string) error {
 
 	dbInfo, ok := extras.LinterListInfo[lintName]
 	if !ok {
-		return fmt.Errorf("unknown linting: %s", lintName)
+		return fmt.Errorf("unknown linter: %s", lintName)
 	}
 
 	cmdArgs, ok := dbInfo[stack]
