@@ -7,11 +7,11 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
-	"github.com/walonCode/backend-starter-cli/internals/extras"
-	"github.com/walonCode/backend-starter-cli/internals/frameworks"
-	"github.com/walonCode/backend-starter-cli/internals/prompt"
-	"github.com/walonCode/backend-starter-cli/internals/runner"
-	"github.com/walonCode/backend-starter-cli/internals/scaffold"
+	"github.com/Walon-Foundation/backend-starter-cli/internals/extras"
+	"github.com/Walon-Foundation/backend-starter-cli/internals/frameworks"
+	"github.com/Walon-Foundation/backend-starter-cli/internals/prompt"
+	"github.com/Walon-Foundation/backend-starter-cli/internals/runner"
+	"github.com/Walon-Foundation/backend-starter-cli/internals/scaffold"
 )
 
 // initCmd represents the init command

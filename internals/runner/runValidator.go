@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/walonCode/backend-starter-cli/internals/extras"
+	"github.com/Walon-Foundation/backend-starter-cli/internals/extras"
 )
 
 // RunDatabase installs DB dependencies based on stack + dbName

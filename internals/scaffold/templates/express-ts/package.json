@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "src/index.js",
+  "types": "module",
   "scripts": {
     "dev": "nodemon",
     "build":"tsc",

@@ -70,7 +70,7 @@ brew install --cask backend-starter
 ### Go Install (Universal)
 
 ```bash
-go install github.com/Walon-Foundation/backend-starter@latest
+go install github.com/Walon-Foundation/backend-starter-cli@latest
 ```
 
 ## Usage
