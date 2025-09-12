@@ -80,10 +80,10 @@ go install github.com/Walon-Foundation/backend-starter-cli@latest
 backend-starter init
 
 # Show help information
-backend-starter-cli help
+backend-starter help
 
 # Display version information
-backend-starter-cli version
+backend-starter version
 ```
 
 ## Supported Frameworks
