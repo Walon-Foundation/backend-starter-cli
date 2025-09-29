@@ -6,12 +6,13 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/spf13/cobra"
 	"github.com/Walon-Foundation/backend-starter-cli/internals/extras"
 	"github.com/Walon-Foundation/backend-starter-cli/internals/frameworks"
 	"github.com/Walon-Foundation/backend-starter-cli/internals/prompt"
 	"github.com/Walon-Foundation/backend-starter-cli/internals/runner"
 	"github.com/Walon-Foundation/backend-starter-cli/internals/scaffold"
+	"github.com/Walon-Foundation/backend-starter-cli/internals/tui"
+	"github.com/spf13/cobra"
 )
 
 // initCmd represents the init command
@@ -21,7 +22,7 @@ var initCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 	
 
-		projectName, err := prompt.AskProjectName()
+		projectName, err := tui.RunInput("Enter the Project Name")
 		if err != nil {
 			fmt.Printf("Error getting project name: %v\n", err)
 			return
@@ -33,7 +34,9 @@ var initCmd = &cobra.Command{
 			options = append(options, opt.Name)
 		}
 
-		stack, err := prompt.SelectBackend(options)
+		stack, err := tui.RunSelection("Select a Backend Framework", options)
+
+		// stack, err := prompt.SelectBackend(options)
 		if err != nil {
 			fmt.Printf("Error selecting backend: %v\n", err)
 			return
@@ -41,7 +44,7 @@ var initCmd = &cobra.Command{
 
 		fmt.Printf("Selected stack: %s\n", stack)
 
-			// Detect OS
+		// Detect OS
 		osName := runner.DectectOs()
 
 		// Decide required tool
@@ -138,7 +141,7 @@ var initCmd = &cobra.Command{
 				name = "fastapi"		
 			}
 			list := extras.DatabaseList[name]
-			dbName,err := prompt.AskDatabase(list)
+			dbName,err := tui.RunSelection("Choice a Database", list)
 			if err != nil {
 				fmt.Printf("Error in choice in a database: %v\n",err)
 			}
@@ -162,7 +165,7 @@ var initCmd = &cobra.Command{
 			
 			//asking for a validator
 			validatorList := extras.ValidationList[name]
-			validatorName, err := prompt.AskForValidator(validatorList)
+			validatorName, err := tui.RunSelection("Select a Validator Library", validatorList)
 			if err != nil {
 				fmt.Println("Error in choosing a validator libray: ",err)
 			}
@@ -173,7 +176,7 @@ var initCmd = &cobra.Command{
 
 			//ask for authentication
 			authList := extras.AuthProviderList[name]
-			authName, err := prompt.AskForAuth(authList)
+			authName, err := tui.RunSelection("Select an Auth Library",authList)
 			if err != nil {
 				fmt.Println("Error choosing an auth library: ",err)
 			}
@@ -230,7 +233,7 @@ var initCmd = &cobra.Command{
 				name = "fastapi"		
 			}
 			list := extras.DatabaseList[name]
-			dbName,err := prompt.AskDatabase(list)
+			dbName,err := tui.RunSelection("Select a Database",list)
 			if err != nil {
 				fmt.Printf("Error in choice in a database: %v\n",err)
 			}
@@ -254,7 +257,7 @@ var initCmd = &cobra.Command{
 
 			//asking for a validator
 			validatorList := extras.ValidationList[name]
-			validatorName, err := prompt.AskForValidator(validatorList)
+			validatorName, err := tui.RunSelection("Select a Validation Library",validatorList)
 			if err != nil {
 				fmt.Println("Error in choosing a validator libray: ",err)
 			}
@@ -267,7 +270,7 @@ var initCmd = &cobra.Command{
 
 			//ask for authentication
 			authList := extras.AuthProviderList[name]
-			authName, err := prompt.AskForAuth(authList)
+			authName, err := tui.RunSelection("Select an Auth Library",authList)
 			if err != nil {
 				fmt.Println("Error choosing an auth library: ",err)
 			}
@@ -278,7 +281,7 @@ var initCmd = &cobra.Command{
 
 			//asking for linting
 			lintList := extras.LinterList[name]
-			lintName,err := prompt.AskForLinting(lintList)
+			lintName,err := tui.RunSelection("Select a Linting Library",lintList)
 			if err != nil {
 				fmt.Println("Error choosing a linting library")
 			}

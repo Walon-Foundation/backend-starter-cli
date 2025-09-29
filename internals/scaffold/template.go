@@ -17,6 +17,7 @@ var renameFiles = map[string]string{
 	"env" : ".env",
 	"air.toml":".air.toml",
 	"gomod":"go.mod",
+	"maingo":"main.go",
 }
 
 // // CopyTemplate copies embedded scaffold files of a given framework to destDir
